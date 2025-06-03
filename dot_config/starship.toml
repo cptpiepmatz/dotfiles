@@ -1,0 +1,47 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+format = """\
+${env_var.NU_IS_DEV}\
+$all\
+${env_var.NU_KNOWN_SECRETS}\
+$time\
+$line_break\
+$status\
+$os\
+$container\
+$netns\
+$shell\
+$character"""
+
+[character]
+format = '$indicator$symbol '
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[status]
+disabled = false
+format = '[$status]($style) '
+
+[git_status]
+disabled = true
+
+[shell]
+disabled = false
+
+[env_var.NU_IS_DEV]
+format = '🛠️ '
+
+[env_var.NU_OVERLAYS]
+symbol = '📌 '
+format = 'with [$symbol($env_value )]($style)'
+style = 'red'
+
+[env_var.NU_KNOWN_SECRETS]
+format = "vaulting [$symbol(\n$env_value )]($style)"
+style = 'bold fg:161'

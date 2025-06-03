@@ -1,0 +1,67 @@
+{
+    "layer": "top",
+    "height": 28,
+    "modules-left": ["cffi/niri-taskbar"],
+    "modules-center": [],
+    "modules-right": [
+        "tray", 
+        "custom/color-scheme",
+        "idle_inhibitor", 
+        "network", 
+        "wireplumber", 
+        "battery", 
+        "clock"
+    ],
+    "cffi/niri-taskbar": {
+        "module_path": "/home/piet/.config/waybar/cffi/libniri_taskbar.so",
+        "apps": {
+            "signal": [
+                {
+                "match": "\\([0-9]+\\)$",
+                "class": "unread"
+                }
+            ]
+        }
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "custom/color-scheme": {
+        "exec": "/home/piet/.config/waybar/custom/color-scheme.nu",
+        "on-click": "/home/piet/.config/waybar/custom/color-scheme.nu --toggle",
+        "return-type": "json",
+        "format": "",
+        "tooltip-format": "{alt}"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "󰅶",
+            "deactivated": "󰾪"
+        }
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} {icon}",
+        "format-ethernet": "",
+        "format-disconnected": "󰤭",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "on-click": "cosmic-settings wireless",
+        "on-click-right": "nm-connection-editor"
+    },
+    "wireplumber": {
+        "format-icons": ["", "", ""],
+        "format": "{volume}% {icon}",
+        "format-muted": "",
+        "on-click": "cosmic-settings sound" 
+    },
+    "battery": {
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""],
+        "on-click": "cosmic-settings power"
+    },
+    "clock": {
+        "tooltip-format": "{:%a, %d. %b  %H:%M}",
+        "on-click": "cosmic-settings time"
+    }
+}
