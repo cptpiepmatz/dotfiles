@@ -588,12 +588,12 @@ binds {
     XF86MonBrightnessUp { spawn "brightnessctl" "set" "+5%"; }
 
     Mod+E { spawn "xdg-open" "/home/piet"; }
+    Mod+Tab { toggle-overview; }
 }
 
 environment {
     DISPLAY ":0"
     ELECTRON_OZONE_PLATFORM_HINT "auto"
-    // GTK_THEME "Adwaita:dark"
     XDG_CURRENT_DESKTOP "GNOME"
     
 }
