@@ -39,8 +39,8 @@ input {
     mouse {
         // off
         // natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
+        accel-speed 0.1
+        accel-profile "flat"
         // scroll-method "no-scroll"
     }
 
@@ -262,6 +262,10 @@ spawn-at-startup "/usr/libexec/polkit-mate-authentication-agent-1"
 spawn-at-startup "hyprpaper"
 spawn-at-startup "waybar"
 
+spawn-at-startup "swayidle" "-w" \
+    "timeout" "300" "niri msg action power-off-monitors" \
+    "timeout" "900" "nu -n -c 'if (not (open /sys/class/power_supply/ADP1/online | into bool)) {^systemctl suspend}'"
+
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
@@ -350,7 +354,7 @@ binds {
     Mod+T { spawn "ghostty"; }
     Mod+D { spawn "fuzzel"; }
     // Super+Alt+L { spawn "swaylock"; }
-    Mod+L { spawn "hyprlock"; }
+    Mod+L { spawn "systemctl" "--user" "start" "lock.service"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
@@ -541,8 +545,8 @@ binds {
     Mod+Shift+Right { set-column-width "+10%"; }
 
     // Finer height adjustments when in column with other windows.
-    Mod+Shift+Minus { set-window-height "-10%"; }
-    Mod+Shift+Equal { set-window-height "+10%"; }
+    // Mod+Shift+Minus { set-window-height "-10%"; }
+    // Mod+Shift+Equal { set-window-height "+10%"; }
 
     // Move the focused window between the floating and the tiling layout.
     Mod+V       { toggle-window-floating; }
@@ -589,6 +593,8 @@ binds {
 
     Mod+E { spawn "xdg-open" "/home/piet"; }
     Mod+Tab { toggle-overview; }
+
+    Mod+P { spawn "nu" "-c" "systemctl --user --quiet is-active wl-mirror | complete | if $in.exit_code != 0 {systemctl --user start wl-mirror} else {systemctl --user stop wl-mirror}"; }
 }
 
 environment {
@@ -602,7 +608,7 @@ hotkey-overlay {
     skip-at-startup
 }
 
-spawn-at-startup "flatpak" "run" "eu.betterbird.BetterBird"
+spawn-at-startup "flatpak" "run" "eu.betterbird.Betterbird"
 workspace "Betterbird"
 window-rule {
     match app-id="betterbird"
