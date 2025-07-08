@@ -34,6 +34,9 @@ disabled = true
 [shell]
 disabled = false
 
+[scala]
+detect_folders = ["!AppData", '.metals']
+
 [env_var.NU_IS_DEV]
 format = '🛠️ '
 
