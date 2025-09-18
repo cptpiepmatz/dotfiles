@@ -5,8 +5,9 @@
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    /* background-color: rgba(43, 48, 59, 0.75); */
+    background-color: transparent;
+    /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
@@ -89,6 +90,8 @@ button:hover {
 #wireplumber,
 #custom-media,
 #custom-color-scheme,
+#custom-notifications,
+#custom-globalprotect,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -97,6 +100,8 @@ button:hover {
 #mpd {
     padding: 0 12px 0 10px;
     color: #ffffff;
+    margin: 0px 2px;
+    border-radius: 0px 0px 5px 5px;
 }
 
 #window,
@@ -115,7 +120,7 @@ button:hover {
 }
 
 #clock {
-    background-color: #64727D;
+    background-color: #BF565F; /** #64727D; **/
 }
 
 #battery {
@@ -187,29 +192,27 @@ label:focus {
 }
 
 #network {
-    background-color: #2980b9;
+    background-color: #1f526c; /** #2980b9; **/
 }
 
 #network.disconnected {
     background-color: #f53c3c;
 }
 
-#pulseaudio {
-    background-color: #f1c40f;
-    color: #000000;
+#custom-globalprotect {
+    background-color: #457b9d;
+    margin-left: -7px;
+    border-left-width: 4px;
+    border-left-color: #1f526c;
+    border-left-style: solid;
+    border-bottom-left-radius: 0;
 }
 
-#pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
+#pulseaudio, #wireplumber {
+    background-color: #275959; /** #f1c40f; **/
 }
 
-#wireplumber {
-    background-color: #f1c40f;
-    color: #000000;
-}
-
-#wireplumber.muted {
+#pulseaudio.muted, #wireplumber.muted {
     background-color: #f53c3c;
 }
 
@@ -237,6 +240,12 @@ label:focus {
     color: black;
 }
 
+#custom-notifications {
+    background-color: #D989A6; /** #7f8c8d; **/
+    border-bottom-right-radius: 0;
+    margin-right: 0;
+}
+
 #temperature {
     background-color: #f0932b;
 }
@@ -246,7 +255,7 @@ label:focus {
 }
 
 #tray {
-    background-color: #1abc9c;
+    background-color: #8ABF97; /** #1abc9c; **/
 }
 
 #tray > .passive {
@@ -337,4 +346,15 @@ label:focus {
 
 #privacy-item.audio-out {
     background-color: #0069d4;
+}
+
+.niri-taskbar button {
+    min-height: 0;
+    min-width: 0;
+    background-color: rgba(43, 48, 59, 0.75);
+}
+
+.niri-taskbar button:last-child {
+    padding-right: 6px;
+    border-radius: 0px 0px 5px 0px;
 }

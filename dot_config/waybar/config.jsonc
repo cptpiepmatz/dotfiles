@@ -1,6 +1,6 @@
 {
     "layer": "top",
-    "height": 28,
+    "height": 26,
     "modules-left": ["cffi/niri-taskbar"],
     "modules-center": [],
     "modules-right": [
@@ -8,12 +8,15 @@
         "custom/color-scheme",
         "idle_inhibitor", 
         "network", 
+        "custom/globalprotect",
         "wireplumber", 
         "battery", 
-        "clock"
+        "clock",
+        "custom/notifications"
     ],
     "cffi/niri-taskbar": {
         "module_path": "/home/piet/.config/waybar/cffi/libniri_taskbar.so",
+        "show_all_outputs": false,
         "apps": {
             "signal": [
                 {
@@ -40,14 +43,24 @@
             "deactivated": "󰾪"
         }
     },
+    // if necessary, add second module for LAN 
+    // https://github.com/Alexays/Waybar/wiki/Configuration#multiple-instances-of-a-module
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "interface": "wlp*", // match both ethernet and wifi
         "format-wifi": "{essid} {icon}",
         "format-ethernet": "",
         "format-disconnected": "󰤭",
         "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
         "on-click": "cosmic-settings wireless",
         "on-click-right": "nm-connection-editor"
+    },
+    "custom/globalprotect": {
+        "exec": "/home/piet/.config/waybar/custom/globalprotect.nu",
+        "hide-empty-text": true,
+        "return-type": "json",
+        "interval": 20,
+        "format": "{text} 󰴳"
     },
     "wireplumber": {
         "format-icons": ["", "", ""],
@@ -63,5 +76,15 @@
     "clock": {
         "tooltip-format": "{:%a, %d. %b  %H:%M}",
         "on-click": "cosmic-settings time"
+    },
+    "custom/notifications": {
+        "exec": "swaync-client -swb",
+        "return-type": "json",
+        "format": "{icon}",
+        "on-click": "swaync-client -t",
+        "format-icons": {
+            "none": "󰂜",
+            "notification": "󱅫"
+        }
     }
 }
