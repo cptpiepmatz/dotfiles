@@ -18,7 +18,7 @@ $env.config.plugins.highlight.theme = "Monokai Extended Origin"
 
 # set NU_OVERLAYS with overlay list, useful for starship prompt
 $env.config.hooks.pre_prompt = ($env.config.hooks.pre_prompt | append {|| 
-  let nu_overlays = (overlay list | slice 1.. | str join ", ")
+  let nu_overlays = (overlay list | get name | slice 1.. | str join ", ")
   if ($nu_overlays | str length | into bool) {
     $env.NU_OVERLAYS = $nu_overlays
   } else {
