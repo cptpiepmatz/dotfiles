@@ -60,3 +60,11 @@ $env.ENV_CONVERSIONS = $env.ENV_CONVERSIONS | merge {
 def --env cdr [] {
   cd (^git rev-parse --show-toplevel)
 }
+
+def git-branches [] {
+  git branch --list 
+  | lines 
+  | each { parse -r '(\*)?\s+(\S+)' | get 0 } 
+  | rename active name 
+  | update active { $in == "*" }
+}
